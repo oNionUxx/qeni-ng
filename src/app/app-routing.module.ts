@@ -53,7 +53,7 @@ const routes: Routes = [
             { path: 'blog-1', component: BlogStyleOneComponent },
             { path: 'blog-2', component: BlogStyleTwoComponent },
             { path: 'blog-details', component: BlogDetailsComponent },
-            { path: 'shop', component: ShopComponent },
+            { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
             { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
             { path: 'checkout', component: CheckoutComponent },
             { path: 'products-details', component: ProductsDetailsComponent },
