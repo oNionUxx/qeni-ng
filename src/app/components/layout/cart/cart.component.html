@@ -5,7 +5,7 @@
             <h3>Cart</h3>
             <ul>
                 <li><a routerLink="/">Home</a></li>
-                <li><i class='bx bxs-chevron-right'></i></li>
+                <li><i class="bx bxs-chevron-right"></i></li>
                 <li>Cart</li>
             </ul>
         </div>
@@ -34,33 +34,38 @@
                             <tr>
                                 <td class="product-thumbnail">
                                     <a routerLink="/products-details">
-                                        <img src="assets/img/products/products-img1.jpg" alt="Image">
+                                        <img src="assets/img/products/products-img1.jpg" alt="Image" />
                                     </a>
                                 </td>
 
                                 <td class="product-name">
-                                    <a routerLink="/products-details">Brand New Tyre</a>
+                                    <a routerLink="/products-details">{{ productToBeAdded.name }}</a>
                                 </td>
-                                
+
                                 <td class="product-price">
-                                    <span class="unit-amount">$50.00</span>
+                                    <span class="unit-amount">${{ productToBeAdded.afterPrice }}</span>
                                 </td>
 
                                 <td class="product-quantity">
                                     <div class="input-counter">
-                                        <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                        <input type="text" value="1">
-                                        <span class="plus-btn"><i class='bx bx-plus'></i></span>
+                                        <span class="minus-btn" (click)="removeUnit()"><i class="bx bx-minus"></i></span>
+                                        <input
+                                            type="text"
+                                            [ngModelOptions]="{ standalone: true }"
+                                            [(ngModel)]="quantity"
+                                            value="{{ quantity }}"
+                                        />
+                                        <span class="plus-btn" (click)="addUnit()"><i class="bx bx-plus"></i></span>
                                     </div>
                                 </td>
 
                                 <td class="product-subtotal">
-                                    <span class="subtotal-amount">$50.00</span>
-                                    <a routerLink="/cart" class="remove"><i class='bx bx-trash'></i></a>
+                                    <span class="subtotal-amount">${{ totalProductPrice }}</span>
+                                    <a routerLink="/cart" class="remove"><i class="bx bx-trash"></i></a>
                                 </td>
                             </tr>
 
-                            <tr>
+                            <!-- <tr>
                                 <td class="product-thumbnail">
                                     <a routerLink="/products-details">
                                         <img src="assets/img/products/products-img2.jpg" alt="Image">
@@ -145,7 +150,7 @@
                                     <span class="subtotal-amount">$50.00</span>
                                     <a routerLink="/cart" class="remove"><i class='bx bx-trash'></i></a>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -159,16 +164,16 @@
                         </div>
 
                         <div class="col-lg-5 col-sm-5 col-md-5 text-right">
-                            <a routerLink="/cart" class=" default-btn">Update Cart</a>
+                            <a routerLink="/cart" class="default-btn">Update Cart</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="cart-calc">
-                        <div class="cart-wraps-form"> 
+                        <div class="cart-wraps-form">
                             <h3>Calculate Shipping</h3>
 
                             <div class="row">
@@ -178,28 +183,28 @@
                                             <option>Credit Card Type</option>
                                             <option>Another option</option>
                                             <option>A option</option>
-                                        </select>	
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <input type="text" class="form-control" placeholder="Credit Card Number">
+                                    <input type="text" class="form-control" placeholder="Credit Card Number" />
                                 </div>
 
                                 <div class="form-group col-12">
-                                    <input type="text" class="form-control" placeholder="Card Verification Number">
+                                    <input type="text" class="form-control" placeholder="Card Verification Number" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Coupon Code">
+                                <input type="text" class="form-control" placeholder="Coupon Code" />
                             </div>
 
                             <button type="submit" class="default-btn border-none">Apply Coupon</button>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-6 col-md-12">
                     <div class="cart-totals">
                         <h3>Cart Totals</h3>
@@ -207,7 +212,9 @@
                             <li>Subtotal <span>$150.00</span></li>
                             <li>Shipping <span>$30.00</span></li>
                             <li>Coupon <span>$20.00</span></li>
-                            <li>Total <span><b>$160.00</b></span></li>
+                            <li>
+                                Total <span><b>$160.00</b></span>
+                            </li>
                         </ul>
                         <a routerLink="/checkout" class="default-btn default-hot-toddy">Proceed To Checkout</a>
                     </div>

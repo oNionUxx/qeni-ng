@@ -4,7 +4,7 @@
         <div class="inner-title text-center">
             <h3>Shop</h3>
             <ul>
-                <li><a routerLink="/">Home</a></li>
+                <li><a routerLink="#">Home</a></li>
                 <li><i class="bx bxs-chevron-right"></i></li>
                 <li>Shop</li>
             </ul>
@@ -28,25 +28,25 @@
             <nav id="sidebar">
                 <ul class="list-unstyled components">
                     <li class="active">
-                        <a href="#" (click)="displayImages(1)">Car Spare Parts</a>
+                        <a href="javascript:void(0)" (click)="displayImages(1)">Car Spare Parts</a>
                     </li>
 
                     <li>
-                        <a href="#" (click)="displayImages(2)">Car Accessories</a>
+                        <a href="javascript:void(0)" (click)="displayImages(2)">Car Accessories</a>
                     </li>
 
                     <li>
-                        <a href="#" (click)="displayImages(3)">Car Emergency Accessories</a>
+                        <a href="javascript:void(0)" (click)="displayImages(3)">Car Emergency Accessories</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
         <div class="row pt-45" *ngIf="isDisplayCarSpareParts" style="background-color: yellow">
-            <div class="col-lg-4 col-sm-6">
+            <div class="col-lg-4 col-sm-6" *ngFor="let product of carParts">
                 <div class="single-product">
                     <a routerLink="/products-details">
-                        <img src="assets/img/products/products-img1.jpg" alt="Images" />
+                        <img src="{{ product.imgRef }}" alt="Images" />
                     </a>
                     <div class="product-content">
                         <ul class="rating">
@@ -59,16 +59,20 @@
                             </li>
                         </ul>
                         <ul>
-                            <li><del>$35.00</del></li>
-                            <li>$30.00</li>
+                            <li>
+                                <del>${{ product.beforePrice }}</del>
+                            </li>
+                            <li>${{ product.afterPrice }}</li>
                         </ul>
-                        <h3><a routerLink="/products-details">Steering Wheel Cover</a></h3>
-                        <a routerLink="/cart" class="default-btn product-btn"><i class="bx bx-cart"></i> Add To Cart</a>
+                        <h3>
+                            <a routerLink="/products-details">{{ product.name }}</a>
+                        </h3>
+                        <a (click)="navigateToCart(product)" class="default-btn product-btn"><i class="bx bx-cart"></i> Add To Cart</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-sm-6">
+            <!-- <div class="col-lg-4 col-sm-6">
                 <div class="single-product">
                     <a routerLink="/products-details">
                         <img src="assets/img/products/products-img2.jpg" alt="Images" />
@@ -139,9 +143,9 @@
                         <a routerLink="/cart" class="default-btn product-btn"><i class="bx bx-cart"></i> Add To Cart</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="col-lg-4 col-sm-6">
+            <!-- <div class="col-lg-4 col-sm-6">
                 <div class="single-product">
                     <a routerLink="/products-details">
                         <img src="assets/img/products/products-img5.jpg" alt="Images" />
@@ -264,7 +268,7 @@
                         <a routerLink="/cart" class="default-btn product-btn"><i class="bx bx-cart"></i> Add To Cart</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="row pt-45" *ngIf="isDisplayCarAccessories" style="background-color: red">
