@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../../models/product';
+
+import { ProductService } from '../../../services/product/product.service';
 
 @Component({
     selector: 'app-cart',
@@ -9,32 +10,30 @@ import { Product } from '../../../models/product';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-    productToBeAdded: Product;
+    products: Product[];
 
-    quantity: number = 1;
-    totalProductPrice: number = 0;
-
-    constructor(private activatedRoute: ActivatedRoute) {}
+    constructor(private productService: ProductService) {}
 
     ngOnInit(): void {
-        this.productToBeAdded = JSON.parse(this.activatedRoute.snapshot.queryParamMap.get('product'));
-        this.totalProductPrice = Number(this.productToBeAdded.afterPrice);
+        this.getUpdatedList();
     }
 
-    addUnit() {
-        this.quantity += 1;
-        this.totalProductPrice = Number(this.productToBeAdded.afterPrice) * this.quantity;
+    getUpdatedList() {
+        this.products = this.productService.getProducts();
     }
 
-    removeUnit() {
-        console.log(this.quantity);
-        this.quantity -= 1;
-        if (this.quantity < 1) {
-            this.quantity = 1;
-        } else {
-            if (this.quantity > 0) {
-                this.totalProductPrice = Number(this.productToBeAdded.afterPrice) * this.quantity;
-            }
-        }
+    addUnit(product) {
+        this.productService.addQuantity(product);
+        this.getUpdatedList();
+    }
+
+    subtractUnit(product) {
+        this.productService.subtractQuantity(product);
+        this.getUpdatedList();
+    }
+
+    removeProduct(product) {
+        this.productService.removeProduct(product);
+        this.getUpdatedList();
     }
 }

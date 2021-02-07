@@ -30,127 +30,40 @@
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody *ngFor="let product of products">
                             <tr>
                                 <td class="product-thumbnail">
                                     <a routerLink="/products-details">
-                                        <img src="assets/img/products/products-img1.jpg" alt="Image" />
+                                        <img src="{{ product.imgRef }}" alt="Image" />
                                     </a>
                                 </td>
 
                                 <td class="product-name">
-                                    <a routerLink="/products-details">{{ productToBeAdded.name }}</a>
+                                    <a routerLink="/products-details">{{ product.name }}</a>
                                 </td>
 
                                 <td class="product-price">
-                                    <span class="unit-amount">${{ productToBeAdded.afterPrice }}</span>
+                                    <span class="unit-amount">${{ product.afterPrice }}</span>
                                 </td>
 
                                 <td class="product-quantity">
                                     <div class="input-counter">
-                                        <span class="minus-btn" (click)="removeUnit()"><i class="bx bx-minus"></i></span>
+                                        <span class="minus-btn" (click)="subtractUnit(product)"><i class="bx bx-minus"></i></span>
                                         <input
                                             type="text"
                                             [ngModelOptions]="{ standalone: true }"
-                                            [(ngModel)]="quantity"
-                                            value="{{ quantity }}"
+                                            [(ngModel)]="product.quantity"
+                                            value="{{ product.quantity }}"
                                         />
-                                        <span class="plus-btn" (click)="addUnit()"><i class="bx bx-plus"></i></span>
+                                        <span class="plus-btn" (click)="addUnit(product)"><i class="bx bx-plus"></i></span>
                                     </div>
                                 </td>
 
                                 <td class="product-subtotal">
-                                    <span class="subtotal-amount">${{ totalProductPrice }}</span>
-                                    <a routerLink="/cart" class="remove"><i class="bx bx-trash"></i></a>
+                                    <span class="subtotal-amount">${{ product.quantity * product.afterPrice }}</span>
+                                    <a routerLink="/cart" class="remove" (click)="removeProduct(product)"><i class="bx bx-trash"></i></a>
                                 </td>
                             </tr>
-
-                            <!-- <tr>
-                                <td class="product-thumbnail">
-                                    <a routerLink="/products-details">
-                                        <img src="assets/img/products/products-img2.jpg" alt="Image">
-                                    </a>
-                                </td>
-
-                                <td class="product-name">
-                                    <a routerLink="/products-details">Oil Filter</a>
-                                </td>
-
-                                <td class="product-price">
-                                    <span class="unit-amount">$30.00</span>
-                                </td>
-
-                                <td class="product-quantity">
-                                    <div class="input-counter">
-                                        <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                        <input type="text" value="1">
-                                        <span class="plus-btn"><i class='bx bx-plus'></i></span>
-                                    </div>
-                                </td>
-
-                                <td class="product-subtotal">
-                                    <span class="subtotal-amount">$30.00</span>
-                                    <a routerLink="/cart" class="remove"><i class='bx bx-trash'></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <a routerLink="/products-details">
-                                        <img src="assets/img/products/products-img3.jpg" alt="Image">
-                                    </a>
-                                </td>
-
-                                <td class="product-name">
-                                    <a routerLink="/products-details">Brake Disk</a>
-                                </td>
-
-                                <td class="product-price">
-                                    <span class="unit-amount"> $75.00</span>
-                                </td>
-
-                                <td class="product-quantity">
-                                    <div class="input-counter">
-                                        <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                        <input type="text" value="1">
-                                        <span class="plus-btn"><i class='bx bx-plus'></i></span>
-                                    </div>
-                                </td>
-
-                                <td class="product-subtotal">
-                                    <span class="subtotal-amount">$75.00</span>
-                                    <a routerLink="/cart" class="remove"><i class='bx bx-trash'></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <a routerLink="/products-details">
-                                        <img src="assets/img/products/products-img4.jpg" alt="Image">
-                                    </a>
-                                </td>
-
-                                <td class="product-name">
-                                    <a routerLink="/products-details">Car Wheels</a>
-                                </td>
-
-                                <td class="product-price">
-                                    <span class="unit-amount">$50.00</span>
-                                </td>
-
-                                <td class="product-quantity">
-                                    <div class="input-counter">
-                                        <span class="minus-btn"><i class='bx bx-minus'></i></span>
-                                        <input type="text" value="1">
-                                        <span class="plus-btn"><i class='bx bx-plus'></i></span>
-                                    </div>
-                                </td>
-
-                                <td class="product-subtotal">
-                                    <span class="subtotal-amount">$50.00</span>
-                                    <a routerLink="/cart" class="remove"><i class='bx bx-trash'></i></a>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>

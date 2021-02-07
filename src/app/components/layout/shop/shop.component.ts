@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+
 import { Product } from '../../../models/product';
+import { ProductService } from '../../../services/product/product.service';
 
 @Component({
     selector: 'app-shop',
@@ -12,83 +14,29 @@ export class ShopComponent implements OnInit {
     isDisplayCarAccessories: boolean = false;
     isDisplayCarEmergencyAccessories: boolean = false;
 
-    carParts: Product[] = [
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
+    carParts: Product[];
 
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
+    constructor(private router: Router, private productService: ProductService) {}
 
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-
-        {
-            name: 'Steering Wheel Cover',
-            beforePrice: '35.00',
-            afterPrice: '30.00',
-            imgRef: 'assets/img/products/products-img1.jpg',
-        },
-    ];
-
-    constructor(private router: Router) {}
-
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.carParts = this.productService.carParts;
+    }
 
     navigateToCart(product) {
+        this.productService.addProduct(product);
+        this.router.navigate(['/cart']);
+    }
+
+    navigateToProductDetails(product) {
         const queryParams: any = {};
+
         queryParams.product = JSON.stringify(product);
+
         const navigationExtras: NavigationExtras = {
             queryParams,
         };
 
-        this.router.navigate(['/cart'], navigationExtras);
+        this.router.navigate(['/products-details'], navigationExtras);
     }
 
     displayImages(value: number) {

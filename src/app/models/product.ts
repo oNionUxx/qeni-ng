@@ -1,6 +1,8 @@
 export interface Product {
+    id: number;
     name: string;
-    beforePrice: string;
-    afterPrice: string;
+    beforePrice: number;
+    afterPrice: number;
     imgRef: string;
+    quantity: number;
 }
